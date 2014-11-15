@@ -12,11 +12,11 @@ class Hand extends Backbone.Collection<Card>{
     model = Card;
     constructor(array, public deck: Deck, public isDealer = false) {
         super();
-        this.deck = deck;
-        this.isDealer = isDealer;
     }
     hit(){
-        this.add(this.deck.pop());
+        var card = this.deck.pop();
+        this.add(card);
+        return card;
     }
     hasAce(){
         return this.reduce(function(memo,card){
