@@ -7,9 +7,9 @@
 /// <reference path="CardView.ts" />
 /// <reference path="../models/Card.ts" />
 
-class HandView extends Backbone.View<Hand> {
+class HandView extends Backbone.View<Card> {
     className = 'hand';
-    //collection: Hand;
+    collection: Hand;
     template = _.template('<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (' +
     '<span class="score"></span>)</h2>');
     //constructor() {
@@ -34,6 +34,3 @@ class HandView extends Backbone.View<Hand> {
         return this;
     }
 }
-
-
-

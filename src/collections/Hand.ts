@@ -9,19 +9,12 @@
 /// <reference path="Deck.ts" />
 
 class Hand extends Backbone.Collection<Card>{
-    public model = Card;
-    public deck: Deck;
-    public isDealer: boolean;
-    //public scores: () => number[];
-    constructor(array, deck, isDealer = false) {
+    model = Card;
+    constructor(array, public deck: Deck, public isDealer = false) {
         super();
         this.deck = deck;
         this.isDealer = isDealer;
     }
-    //initialize(array, deck, isDealer){
-    //    this.deck = deck;
-    //    this.isDealer = isDealer;
-    //}
     hit(){
         this.add(this.deck.pop());
     }
@@ -41,7 +34,7 @@ class Hand extends Backbone.Collection<Card>{
         }, 0)
     }
 
-    public scores = () => {
+    scores() {
         return [this.minScore(), this.minScore() + 10 * this.hasAce()];
     }
 }
