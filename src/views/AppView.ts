@@ -91,6 +91,7 @@ class AppView extends Backbone.View<App> {
     }
 
     //do something with the following
-    this.model.getWinner()
+    var winner = this.model.getWinner();
+    console.log("winner", winner);
   }
 }
