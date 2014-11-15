@@ -4,6 +4,10 @@
 class App extends Backbone.Model{
     constructor() {
         super();
+        this.newGame();
+    }
+
+    newGame() {
         var deck = new Deck();
         this.set('deck', deck);
         var playerHand = deck.dealPlayer();

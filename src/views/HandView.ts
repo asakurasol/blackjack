@@ -30,7 +30,7 @@ class HandView extends Backbone.View<Card> {
         this.$el.append(this.collection.map(function(card, index): any {
             return (new CardView({model: card})).$el;
         }));
-        this.$('.score').text(self.collection.scores()[0]);
+        this.$('.score').text(self.collection.bestScore());
         return this;
     }
 }

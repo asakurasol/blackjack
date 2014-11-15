@@ -15,7 +15,16 @@ class Hand extends Backbone.Collection<Card>{
     autoPlay(){
         //set up while loop as long as min score is less than 18
             //this.hit
-        while(this.minScore()<18){
+        /*
+        dealer hits <= hard 16 (no ace)
+        dealer hits soft 17
+        dealer stands on any >= 18
+
+        if either >= 18: stand
+        if m
+         */
+        // <= hard 16
+        while(this.minScore() <17 && this.scores()[1] <= 17){
             this.hit();
         }
     }
@@ -47,5 +56,14 @@ class Hand extends Backbone.Collection<Card>{
 
     scores() {
         return [this.minScore(), this.minScore() + 10 * this.hasAce()];
+    }
+
+    bestScore() {
+        var scores = this.scores();
+        if (scores[1] > 21) {
+            return scores[0];
+        } else {
+            return scores[1];
+        }
     }
 }

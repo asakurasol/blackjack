@@ -7,6 +7,7 @@ class AppView extends Backbone.View<App> {
     return _.template(
       '<button class="hit-button">Hit</button> ' +
       '<button class="stand-button">Stand</button> ' +
+      '<button class="replay-button">Replay</button>' +
       '<div class="player-hand-container"></div> ' +
       '<div class="dealer-hand-container"></div>'
     );
@@ -15,7 +16,8 @@ class AppView extends Backbone.View<App> {
   constructor(options?) {
     this.events = <any>{
       'click .hit-button': 'playerHit',
-      'click .stand-button': 'playerStand'
+      'click .stand-button': 'playerStand',
+      'click .replay-button': 'replay'
     };
 
     super(options);
@@ -41,11 +43,19 @@ class AppView extends Backbone.View<App> {
   }
 
   playerStand() {
+    this.$('.hit-button').prop('disabled', true);
     var playerHand: Hand = this.model.get('playerHand');
     var dealerHand: Hand = this.model.get('dealerHand');
     playerHand.stand();
     dealerHand.reveal();
     dealerHand.autoPlay();
     //return playerHand.stand();
+  }
+
+  replay() {
+    console.log('replaying');
+    this.$('.hit-button').prop('disabled', false);
+    this.model.newGame();
+    this.render();
   }
 }
