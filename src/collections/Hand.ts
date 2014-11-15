@@ -2,7 +2,7 @@
 /// <reference path="Deck.ts" />
 
 class Hand extends Backbone.Collection<Card>{
-    model = Card;
+    //model = typeof Card;
     constructor(array: Card[], public deck: Deck, public isDealer = false) {
         //super();
         super(array);

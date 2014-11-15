@@ -1,11 +1,15 @@
 /// <reference path="../../typings/backbone/backbone.d.ts" />
 /// <reference path="../models/Card.ts" />
 
+interface CardViewModel {
+    model: Card;
+}
+
 class CardView extends Backbone.View<Card> {
-    className = 'card';
+    //static className = 'card';
     template;
     //template = _.template('<%= rankName %> of <%= suitName %>');
-    constructor(params: PlayingCard){
+    constructor(params: CardViewModel){
         super(params);
         this.template = _.template('<%= rankName %> of <%= suitName %>');
         console.log("card view!");
@@ -16,6 +20,7 @@ class CardView extends Backbone.View<Card> {
     //}
     render(){
         //var temp = _.template('<%= rankName %> of <%= suitName %>');
+        this.$el.addClass("card");
         this.$el.children().detach();
         console.log("attributes", this.model.attributes);
         this.$el.html(this.template(this.model.attributes));

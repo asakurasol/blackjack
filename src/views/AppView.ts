@@ -1,6 +1,3 @@
-/**
- * Created by Derek on 11/14/14.
- */
 /// <reference path="../../typings/backbone/backbone.d.ts" />
 /// <reference path="HandView.ts" />
 /// <reference path="../models/App.ts" />

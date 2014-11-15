@@ -6,13 +6,8 @@ interface PlayingCard {
 }
 
 class Card extends Backbone.Model {
-    //constructor(params: PlayingCard) {
-    //    super(params);
-    //    //this.init(params);
-    //    return this;
-    //}
-    initialize(params){
-        console.log("params", params);
+    constructor(params: PlayingCard) {
+        super();
         this.set('revealed', true);
         if(!params.rank || params.rank > 10){
             this.set('value', 10);
@@ -20,7 +15,6 @@ class Card extends Backbone.Model {
             this.set('value', params.rank);
         }
         var suitName = ['Spades', 'Diamonds', 'Clubs', 'Hearts'][params.suit];
-        console.log(suitName);
         this.set('suitName', suitName);
         var rankName: any = params.rank;
         if(rankName === 0){
@@ -37,7 +31,7 @@ class Card extends Backbone.Model {
         }
 
         this.set('rankName', rankName);
-//return this;
+        return this;
     }
 
     flip(): Card {
