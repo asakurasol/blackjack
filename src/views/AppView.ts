@@ -45,7 +45,7 @@ class AppView extends Backbone.View<App> {
     var dealerHand: Hand = this.model.get('dealerHand');
     playerHand.stand();
     dealerHand.reveal();
-
+    dealerHand.autoPlay();
     //return playerHand.stand();
   }
 }

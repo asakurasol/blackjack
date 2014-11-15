@@ -12,6 +12,13 @@ class Hand extends Backbone.Collection<Card>{
         this.add(card);
         return card;
     }
+    autoPlay(){
+        //set up while loop as long as min score is less than 18
+            //this.hit
+        while(this.minScore()<18){
+            this.hit();
+        }
+    }
     stand() {
         this.trigger('stand');
         // TODO
