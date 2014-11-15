@@ -2,7 +2,6 @@
 /// <reference path="Deck.ts" />
 
 class Hand extends Backbone.Collection<Card>{
-    //model = typeof Card;
     constructor(array: Card[], public deck: Deck, public isDealer = false) {
         super(array);
         return this;
@@ -13,17 +12,6 @@ class Hand extends Backbone.Collection<Card>{
         return card;
     }
     autoPlay(){
-        //set up while loop as long as min score is less than 18
-            //this.hit
-        /*
-        dealer hits <= hard 16 (no ace)
-        dealer hits soft 17
-        dealer stands on any >= 18
-
-        if either >= 18: stand
-        if m
-         */
-        // <= hard 16
         while(this.minScore() <17 && this.scores()[1] <= 17){
             this.hit();
         }
@@ -40,7 +28,7 @@ class Hand extends Backbone.Collection<Card>{
     }
     hasAce(){
         return this.reduce(function(memo,card){
-            return memo || card.get('value') === 1
+            return memo || (card.get('revealed') && card.get('value') === 1);
         }, false)
     }
 
