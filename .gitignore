@@ -29,11 +29,17 @@ results
 npm-debug.log
 node_modules
 
-#coffee
+#typescript
+#file watcher:
+#--out $ProjectFileDir$/compiled/$FileDirRelativeToProjectRoot$/$FileNameWithoutExtension$.js --sourcemap $FileName$
 compiled
+typings
 
 # Floobits
 .floo
 .floobit
 .floo
 .flooignore
+
+# webstorm
+.idea
