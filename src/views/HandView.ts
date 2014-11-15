@@ -1,11 +1,6 @@
-/**
- * Created by Derek on 11/14/14.
- */
 /// <reference path="../../typings/backbone/backbone.d.ts" />
-/// <reference path="../models/Card.ts" />
 /// <reference path="../collections/Hand.ts" />
 /// <reference path="CardView.ts" />
-/// <reference path="../models/Card.ts" />
 
 class HandView extends Backbone.View<Card> {
     className = 'hand';
@@ -33,7 +28,6 @@ class HandView extends Backbone.View<Card> {
         console.log("coll", this.collection);
         console.log("templ", this.template);
         this.$el.html(this.template(this.collection));
-
 
         console.log("hand el", this.collection.map(function(card, index): any {
             console.log("***************");

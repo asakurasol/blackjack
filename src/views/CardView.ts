@@ -1,7 +1,3 @@
-/**
- * Created by Derek on 11/14/14.
- */
-
 /// <reference path="../../typings/backbone/backbone.d.ts" />
 /// <reference path="../models/Card.ts" />
 
@@ -9,7 +5,7 @@ class CardView extends Backbone.View<Card> {
     className = 'card';
     template;
     //template = _.template('<%= rankName %> of <%= suitName %>');
-    constructor(params: any){
+    constructor(params: PlayingCard){
         super(params);
         this.template = _.template('<%= rankName %> of <%= suitName %>');
         console.log("card view!");

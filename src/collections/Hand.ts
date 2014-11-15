@@ -1,11 +1,4 @@
-/**
- * Created by Derek on 11/14/14.
- */
-
-/// <reference path="../../typings/jquery/jquery.d.ts" />
-/// <reference path="../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../typings/backbone/backbone.d.ts" />
-/// <reference path="../models/Card.ts" />
 /// <reference path="Deck.ts" />
 
 class Hand extends Backbone.Collection<Card>{
