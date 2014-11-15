@@ -9,6 +9,9 @@ class Hand extends Backbone.Collection<Card>{
     hit(){
         var card = this.deck.pop();
         this.add(card);
+        if(this.bestScore()>21){
+            this.trigger('bust', this.isDealer);
+        }
         return card;
     }
     autoPlay(){

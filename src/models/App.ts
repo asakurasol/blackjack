@@ -14,4 +14,14 @@ class App extends Backbone.Model{
         this.set('playerHand', playerHand);
         this.set('dealerHand', deck.dealDealer());
     }
+
+    getWinner(){
+        var playerScore = this.get('playerHand').bestScore();
+        var dealerScore = this.get('dealerHand').bestScore();
+        if(playerScore === dealerScore){
+            return 'push';
+        } else if(playerScore > dealerScore) {
+
+        }
+    }
 }

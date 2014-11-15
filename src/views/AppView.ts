@@ -19,9 +19,18 @@ class AppView extends Backbone.View<App> {
       'click .stand-button': 'playerStand',
       'click .replay-button': 'replay'
     };
-
     super(options);
     this.render();
+    var playerHand: Hand = this.model.get('playerHand');
+    var dealerHand: Hand = this.model.get('dealerHand');
+
+    playerHand.on('bust', () => {
+      this.endGame();
+
+    });
+    dealerHand.on('bust', () => {
+      this.endGame();
+    })
   }
 
   render() {
@@ -43,13 +52,15 @@ class AppView extends Backbone.View<App> {
   }
 
   playerStand() {
-    this.$('.hit-button').prop('disabled', true);
+    //this.$('.hit-button').prop('disabled', true);
     var playerHand: Hand = this.model.get('playerHand');
-    var dealerHand: Hand = this.model.get('dealerHand');
+    //var dealerHand: Hand = this.model.get('dealerHand');
     playerHand.stand();
-    dealerHand.reveal();
-    dealerHand.autoPlay();
+    //dealerHand.reveal();
+    //dealerHand.autoPlay();
+    //this.model.getWinner();
     //return playerHand.stand();
+    this.endGame();
   }
 
   replay() {
@@ -57,5 +68,29 @@ class AppView extends Backbone.View<App> {
     this.$('.hit-button').prop('disabled', false);
     this.model.newGame();
     this.render();
+
+    var playerHand: Hand = this.model.get('playerHand');
+    var dealerHand: Hand = this.model.get('dealerHand');
+
+    playerHand.on('bust', () => {
+      this.endGame();
+
+    });
+    dealerHand.on('bust', () => {
+      this.endGame();
+    })
+  }
+
+  endGame() {
+    this.$('.hit-button').prop('disabled', true);
+    var playerHand: Hand = this.model.get('playerHand');
+    var dealerHand: Hand = this.model.get('dealerHand');
+    dealerHand.reveal();
+    if (playerHand.bestScore() <= 21) {
+      dealerHand.autoPlay();
+    }
+
+    //do something with the following
+    this.model.getWinner()
   }
 }
