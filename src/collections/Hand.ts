@@ -12,6 +12,7 @@ class Hand extends Backbone.Collection<Card>{
     public model = Card;
     public deck: Deck;
     public isDealer: boolean;
+    //public scores: () => number[];
     constructor(array, deck, isDealer = false) {
         super();
         this.deck = deck;
@@ -40,7 +41,7 @@ class Hand extends Backbone.Collection<Card>{
         }, 0)
     }
 
-    scores(){
+    public scores = () => {
         return [this.minScore(), this.minScore() + 10 * this.hasAce()];
     }
 }
