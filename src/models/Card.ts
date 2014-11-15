@@ -26,9 +26,6 @@ class Card extends Backbone.Model {
         } else if (rankName === 12){
             rankName = 'Queen';
         }
-        if (!rankName) {
-            debugger;
-        }
 
         this.set('rankName', rankName);
         return this;
@@ -36,6 +33,11 @@ class Card extends Backbone.Model {
 
     flip(): Card {
         this.set('revealed', !this.get('revealed'));
+        return this;
+    }
+
+    reveal(): Card {
+        this.set('revealed', true);
         return this;
     }
 }

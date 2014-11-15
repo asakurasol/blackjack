@@ -13,16 +13,16 @@ class AppView extends Backbone.View<App> {
   }
 
   constructor(options?) {
-    super(options);
     this.events = <any>{
       'click .hit-button': 'playerHit',
       'click .stand-button': 'playerStand'
     };
+
+    super(options);
     this.render();
   }
 
   render() {
-    console.log("***rendering appview");
     this.$el.children().detach();
     this.$el.html(this.template());
     this.$('.player-hand-container').html(
@@ -33,7 +33,6 @@ class AppView extends Backbone.View<App> {
       new HandView({
         collection: this.model.get('dealerHand')
     }).el);
-    console.log("app $el", this.$el);
     return this;
   }
 
@@ -42,6 +41,11 @@ class AppView extends Backbone.View<App> {
   }
 
   playerStand() {
-    return this.model.get('playerHand').stand();
+    var playerHand: Hand = this.model.get('playerHand');
+    var dealerHand: Hand = this.model.get('dealerHand');
+    playerHand.stand();
+    dealerHand.reveal();
+
+    //return playerHand.stand();
   }
 }
