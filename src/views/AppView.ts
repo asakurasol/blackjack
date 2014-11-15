@@ -22,7 +22,6 @@ class AppView extends Backbone.View<App> {
       'click .stand-button': 'playerStand'
     };
     this.render();
-    debugger;
   }
 
   render() {

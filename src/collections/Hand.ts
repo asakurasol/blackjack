@@ -10,8 +10,10 @@
 
 class Hand extends Backbone.Collection<Card>{
     model = Card;
-    constructor(array, public deck: Deck, public isDealer = false) {
-        super();
+    constructor(array: Card[], public deck: Deck, public isDealer = false) {
+        //super();
+        super(array);
+        //return this;
     }
     hit(){
         var card = this.deck.pop();

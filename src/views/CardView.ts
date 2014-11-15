@@ -13,12 +13,15 @@ class CardView extends Backbone.View<Card> {
         super(params);
         this.template = _.template('<%= rankName %> of <%= suitName %>');
         console.log("card view!");
-    }
-    initialize(){
         return this.render();
     }
+    //initialize(){
+    //    return this.render();
+    //}
     render(){
+        //var temp = _.template('<%= rankName %> of <%= suitName %>');
         this.$el.children().detach();
+        console.log("attributes", this.model.attributes);
         this.$el.html(this.template(this.model.attributes));
         if(!this.model.get('revealed')){
             this.$el.addClass('covered')
@@ -26,4 +29,7 @@ class CardView extends Backbone.View<Card> {
         console.log("card html", this.$el.html());
         return this;
     }
+    //template(params: any) {
+    //    return _.template('<%= params.rankName %> of <%= params.suitName %>')
+    //}
 }

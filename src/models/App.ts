@@ -7,14 +7,14 @@
 
 class App extends Backbone.Model{
     constructor() {
-        debugger;
-        console.log("******cons App");
         super();
         console.log("******cons App");
-            var deck = new Deck();
-            this.set('deck', deck);
-            this.set('playerHand', deck.dealPlayer());
-            this.set('dealerHand', deck.dealDealer());
+        var deck = new Deck();
+        this.set('deck', deck);
+        var playerHand = deck.dealPlayer();
+        console.log("PlayerHand", playerHand);
+        this.set('playerHand', playerHand);
+        this.set('dealerHand', deck.dealDealer());
     }
     //initialize(){
     //    console.log("****init App");

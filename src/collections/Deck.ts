@@ -4,12 +4,14 @@
 /// <reference path="Hand.ts" />
 class Deck extends Backbone.Collection<Card>{
     public model = Card;
-    initialize(){
+    constructor() {
+        super();
         var deckArray = _.range(52);
         var mappedDeck = _(deckArray).shuffle().map(function(card){
             return new Card({rank: card%13, suit: Math.floor(card/13)})
         });
         this.add(mappedDeck);
+        return this;
     }
 
     dealPlayer(){
