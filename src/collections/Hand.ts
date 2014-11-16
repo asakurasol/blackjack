@@ -6,6 +6,7 @@ class Hand extends Backbone.Collection<Card>{
     super(array);
     return this;
   }
+
   hit(){
     var card = this.deck.pop();
     this.add(card);
@@ -14,17 +15,21 @@ class Hand extends Backbone.Collection<Card>{
     }
     return card;
   }
+
   autoPlay(){
     while(this.minScore() <17 && this.scores()[1] <= 17){
       this.hit();
     }
   }
+
   stand() {
     this.trigger('stand');
   }
+
   reveal() {
     this.first().reveal();
   }
+
   hasAce(){
     return this.reduce(function(memo,card){
       return memo || (card.get('revealed') && card.get('value') === 1);
