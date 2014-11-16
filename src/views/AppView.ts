@@ -3,15 +3,16 @@
 /// <reference path="../models/App.ts" />
 
 class AppView extends Backbone.View<App> {
-  template() {
-    return _.template(
-      '<button class="hit-button">Hit</button>' +
-      '<button class="stand-button">Stand</button>' +
-      '<button class="replay-button">Replay</button>' +
-      '<div class="player-hand-container"></div>' +
-      '<div class="dealer-hand-container"></div>'
-    );
-  }
+  static TEMPLATE = _.template(
+    '<button class="hit-button">Hit</button>' +
+    '<button class="stand-button">Stand</button>' +
+    '<button class="replay-button">Replay</button>' +
+    '<div class="player-hand-container"></div>' +
+    '<div class="dealer-hand-container"></div>'
+  );
+
+  dealerHand: Hand;
+  playerHand: Hand;
 
   constructor(options?) {
     this.events = <any>{
@@ -20,30 +21,34 @@ class AppView extends Backbone.View<App> {
       'click .replay-button': 'replay'
     };
     super(options);
+    this.playerHand = this.model.get('playerHand');
+    this.dealerHand = this.model.get('dealerHand');
+    this.init();
+  }
+
+  init() {
     this.render();
-    var playerHand: Hand = this.model.get('playerHand');
-    var dealerHand: Hand = this.model.get('dealerHand');
+    this.addListeners();
+    this.checkBlackjack();
+  }
 
-    playerHand.on('bust', () => {
+  checkBlackjack() {
+    if (this.playerHand.bestScore() === 21 || this.dealerHand.bestScore() === 21) {
       this.endGame();
-
-    });
-    dealerHand.on('bust', () => {
-      this.endGame();
-    })
+    }
   }
 
   render() {
     this.$el.children().detach();
-    this.$el.html(this.template());
+    this.$el.html(AppView.TEMPLATE);
     this.$('.player-hand-container').html(
       new HandView({
         collection: this.model.get('playerHand')
-    }).el);
+      }).el);
     this.$('.dealer-hand-container').html(
       new HandView({
         collection: this.model.get('dealerHand')
-    }).el);
+      }).el);
     return this;
   }
 
@@ -63,30 +68,30 @@ class AppView extends Backbone.View<App> {
 
   replay() {
     $('.imageContainer').children().detach();
-    console.log('replaying');
     this.$('.hit-button').prop('disabled', false);
     this.model.newGame();
     this.render();
 
-    var playerHand: Hand = this.model.get('playerHand');
-    var dealerHand: Hand = this.model.get('dealerHand');
+    this.playerHand = this.model.get('playerHand');
+    this.dealerHand = this.model.get('dealerHand');
 
-    playerHand.on('bust', () => {
+    this.addListeners();
+  }
+
+  addListeners() {
+    this.playerHand.on('bust', () => {
       this.endGame();
-
     });
-    dealerHand.on('bust', () => {
+    this.dealerHand.on('bust', () => {
       this.endGame();
-    })
+    });
   }
 
   endGame() {
     this.$('.hit-button').prop('disabled', true);
-    var playerHand: Hand = this.model.get('playerHand');
-    var dealerHand: Hand = this.model.get('dealerHand');
-    dealerHand.reveal();
-    if (playerHand.bestScore() <= 21) {
-      dealerHand.autoPlay();
+    this.dealerHand.reveal();
+    if (this.playerHand.bestScore() <= 21) {
+      this.dealerHand.autoPlay();
     }
 
     var winner = this.model.getWinner();
