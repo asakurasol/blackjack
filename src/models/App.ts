@@ -4,14 +4,14 @@
 class App extends Backbone.Model{
     constructor() {
         super();
+        this.set('deck', new Deck());
         this.newGame();
     }
 
     newGame() {
-        var deck = new Deck();
-        this.set('deck', deck);
-        var playerHand = deck.dealPlayer();
-        this.set('playerHand', playerHand);
+        var deck = this.get('deck');
+        deck.maybeShuffle();
+        this.set('playerHand', deck.dealPlayer());
         this.set('dealerHand', deck.dealDealer());
     }
 
