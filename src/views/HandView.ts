@@ -3,30 +3,26 @@
 /// <reference path="CardView.ts" />
 
 class HandView extends Backbone.View<Card> {
-    //static className = 'hand';
     collection: Hand;
 
-    template = _.template(
-            '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (' +
-            '<span class="score"></span>)</h2>'
-        );
+    static TEMPLATE = _.template(
+      '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (' +
+      '<span class="score"></span>)</h2>'
+    );
 
     constructor(params) {
         super(params);
         this.collection.on('add remove change', () => {
             this.render();
         });
-        this.template = _.template(
-          '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (' +
-          '<span class="score"></span>)</h2>'
-        );
         return this.render();
     }
-    render(){
+
+    render() {
         var self = this;
         this.$el.addClass('hand');
         this.$el.children().detach();
-        this.$el.html(this.template(this.collection));
+        this.$el.html(HandView.TEMPLATE(this.collection));
         this.$el.append(this.collection.map(function(card, index): any {
             return (new CardView({model: card})).$el;
         }));

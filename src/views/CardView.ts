@@ -6,25 +6,23 @@ interface CardViewModel {
 }
 
 class CardView extends Backbone.View<Card> {
-    //static className = 'card';
-    template;
-    //template = _.template('<%= rankName %> of <%= suitName %>');
-    constructor(params: CardViewModel){
+    static CARD_BACK = '<img src="img/card-back.png">';
+    static TEMPLATE = _.template('<img src="img/cards/<%= rankName %>-<%= suitName %>.png">');
+
+    constructor(params: CardViewModel) {
         super(params);
-        this.template = _.template('<%= rankName %> of <%= suitName %>');
         return this.render();
     }
-    render(){
-        //var temp = _.template('<%= rankName %> of <%= suitName %>');
+
+    render() {
         this.$el.addClass("card");
         this.$el.children().detach();
-        this.$el.html(this.template(this.model.attributes));
-        if(!this.model.get('revealed')){
-            this.$el.addClass('covered')
+        if (this.model.get('revealed')) {
+            this.$el.html(CardView.TEMPLATE(this.model.attributes));
+        } else {
+            this.$el.addClass('covered');
+            this.$el.html(CardView.CARD_BACK);
         }
         return this;
     }
-    //template(params: any) {
-    //    return _.template('<%= params.rankName %> of <%= params.suitName %>')
-    //}
 }

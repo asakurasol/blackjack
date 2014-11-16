@@ -21,13 +21,9 @@ class Hand extends Backbone.Collection<Card>{
     }
     stand() {
         this.trigger('stand');
-        // TODO
     }
     reveal() {
-        this.each((card) => {
-            card.reveal();
-        });
-        //this.trigger('reveal');
+        this.first().reveal();
     }
     hasAce(){
         return this.reduce(function(memo,card){
@@ -51,10 +47,6 @@ class Hand extends Backbone.Collection<Card>{
 
     bestScore() {
         var scores = this.scores();
-        if (scores[1] > 21) {
-            return scores[0];
-        } else {
-            return scores[1];
-        }
+        return scores[1] > 21 ? scores[0] : scores[1];
     }
 }

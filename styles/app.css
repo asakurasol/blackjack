@@ -7,6 +7,14 @@
   margin-right: 20px;
 }
 
+.card img {
+  width: inherit;
+}
+
+.imageContainer {
+  margin: 20px
+}
+
 .covered {
   background-color: black;
 }

@@ -5,10 +5,10 @@
 class AppView extends Backbone.View<App> {
   template() {
     return _.template(
-      '<button class="hit-button">Hit</button> ' +
-      '<button class="stand-button">Stand</button> ' +
+      '<button class="hit-button">Hit</button>' +
+      '<button class="stand-button">Stand</button>' +
       '<button class="replay-button">Replay</button>' +
-      '<div class="player-hand-container"></div> ' +
+      '<div class="player-hand-container"></div>' +
       '<div class="dealer-hand-container"></div>'
     );
   }
@@ -47,23 +47,22 @@ class AppView extends Backbone.View<App> {
     return this;
   }
 
+  renderWinner(winner: string) {
+    $('.imageContainer').html('<img src="img/' + winner + '.gif">');
+  }
+
   playerHit() {
     return this.model.get('playerHand').hit();
   }
 
   playerStand() {
-    //this.$('.hit-button').prop('disabled', true);
     var playerHand: Hand = this.model.get('playerHand');
-    //var dealerHand: Hand = this.model.get('dealerHand');
     playerHand.stand();
-    //dealerHand.reveal();
-    //dealerHand.autoPlay();
-    //this.model.getWinner();
-    //return playerHand.stand();
     this.endGame();
   }
 
   replay() {
+    $('.imageContainer').children().detach();
     console.log('replaying');
     this.$('.hit-button').prop('disabled', false);
     this.model.newGame();
@@ -90,8 +89,7 @@ class AppView extends Backbone.View<App> {
       dealerHand.autoPlay();
     }
 
-    //do something with the following
     var winner = this.model.getWinner();
-    console.log("winner", winner);
+    this.renderWinner(winner);
   }
 }

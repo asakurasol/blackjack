@@ -22,9 +22,9 @@ class App extends Backbone.Model{
             if (playerScore === dealerScore){
                 return 'push';
             } else if (playerScore > dealerScore || dealerScore > 21) {
-                return "player"
+                return "win"
             }
         }
-        return "dealer";
+        return "lose";
     }
 }

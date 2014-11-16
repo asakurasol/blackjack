@@ -17,9 +17,9 @@ class Card extends Backbone.Model {
         var suitName = ['Spades', 'Diamonds', 'Clubs', 'Hearts'][params.suit];
         this.set('suitName', suitName);
         var rankName: any = params.rank;
-        if(rankName === 0){
+        if (rankName === 0){
             rankName = 'King';
-        } else if (rankName ===1){
+        } else if (rankName === 1){
             rankName = 'Ace';
         } else if (rankName === 11){
             rankName = 'Jack';
@@ -31,12 +31,12 @@ class Card extends Backbone.Model {
         return this;
     }
 
-    flip(): Card {
+    flip() {
         this.set('revealed', !this.get('revealed'));
         return this;
     }
 
-    reveal(): Card {
+    reveal() {
         this.set('revealed', true);
         return this;
     }
